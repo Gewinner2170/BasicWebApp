@@ -23,11 +23,16 @@ public class QueryProcessor {
             //question %20what%20is%203%20plus%205
             // TODO extend the programm here
             String[] numbersToAdd = query.split("what%20is%20")[1].split("%20plus%20");
-            return "" + (Integer.parseInt(numbersToAdd[0]) + Integer.parseInt(numbersToAdd[1]));
+            List<Integer> numbers = Arrays.stream(numbersToAdd).map(x -> Integer.parseInt(x)).collect(Collectors.toList());
+            int output = 0;
+            for (int curInt : numbers) {
+                output += curInt;
+            }
+            return "" + output;
         } else if (query.contains("%20which%20of%20the%20following%20numbers%20is%20the%20largest:")) {
-            //question: %20which%20of%20the%20following%20numbers%20is%20the%20largest:%20238,%2068
+            //question: %20which%20of%20the%20following%20numbers%20is%20the%20largest:%20146,%2049,%20648,%2074
             String[] numbersToCompare = query.split("20which%20of%20the%20following%20numbers%20is%20the%20largest:%20")[1].split(",%20");
-            List<Integer> numbers = Arrays.asList(numbersToCompare).stream().map(x -> Integer.parseInt(x)).collect(Collectors.toList());
+            List<Integer> numbers = Arrays.stream(numbersToCompare).map(x -> Integer.parseInt(x)).collect(Collectors.toList());
             int largest = numbers.get(0);
             for (int curInt : numbers) {
                 if (curInt > largest) {
