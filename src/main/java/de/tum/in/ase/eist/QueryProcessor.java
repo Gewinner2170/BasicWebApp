@@ -40,7 +40,32 @@ public class QueryProcessor {
                 }
             }
             return "" + largest;
+        } else if (query.contains("%20which%20of%20the%20following%20numbers%20is%20both%20a%20square%20and%20a%20cube:%20")) {
+            //question: %20which%20of%20the%20following%20numbers%20is%20both%20a%20square%20and%20a%20cube:%20113,%20289
+            String[] numbersToCompare = query.split("%20which%20of%20the%20following%20numbers%20is%20both%20a%20square%20and%20a%20cube:%20")[1].split(",%20");
+            List<Integer> numbers = Arrays.stream(numbersToCompare).map(x -> Integer.parseInt(x)).collect(Collectors.toList());
+            for (int curInt : numbers) {
+                if (isSquare(curInt) && isCube(curInt)) {
+                    return "" + curInt;
+                }
+            }
         }
         return "";
+    }
+
+    private boolean isCube(int curInt) {
+        double root = Math.cbrt(curInt);
+        if (root == (int) root) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isSquare(int curInt) {
+        double root = Math.sqrt(curInt);
+        if (root == (int) root) {
+            return true;
+        }
+        return false;
     }
 }
