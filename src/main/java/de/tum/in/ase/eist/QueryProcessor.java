@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class QueryProcessor {
+    //comment to allow a commit
 
     public String process(String query) {
 		query = query.toLowerCase();
