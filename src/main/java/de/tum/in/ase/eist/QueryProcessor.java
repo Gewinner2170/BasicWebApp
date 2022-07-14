@@ -2,6 +2,10 @@ package de.tum.in.ase.eist;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class QueryProcessor {
     //comment to allow a commit
@@ -23,13 +27,14 @@ public class QueryProcessor {
         } else if (query.contains("%20which%20of%20the%20following%20numbers%20is%20the%20largest:")) {
             //question: %20which%20of%20the%20following%20numbers%20is%20the%20largest:%20238,%2068
             String[] numbersToCompare = query.split("20which%20of%20the%20following%20numbers%20is%20the%20largest:%20")[1].split(",%20");
-            int number1 = Integer.parseInt(numbersToCompare[0]);
-            int number2 = Integer.parseInt(numbersToCompare[1]);
-            if (number1 > number2) {
-                return "" + number1;
-            } else {
-                return "" + number2;
+            List<Integer> numbers = Arrays.asList(numbersToCompare).stream().map(x -> Integer.parseInt(x)).collect(Collectors.toList());
+            int largest = numbers.get(0);
+            for (int curInt : numbers) {
+                if (curInt > largest) {
+                    largest = curInt;
+                }
             }
+            return "" + largest;
         }
         return "";
     }
