@@ -20,6 +20,16 @@ public class QueryProcessor {
             // TODO extend the programm here
             String[] numbersToAdd = query.split("what%20is%20")[1].split("%20plus%20");
             return "" + (Integer.parseInt(numbersToAdd[0]) + Integer.parseInt(numbersToAdd[1]));
+        } else if (query.contains("%20which%20of%20the%20following%20numbers%20is%20the%20largest:")) {
+            //question: %20which%20of%20the%20following%20numbers%20is%20the%20largest:%20238,%2068
+            String[] numbersToCompare = query.split("20which%20of%20the%20following%20numbers%20is%20the%20largest:%20")[1].split(",%20");
+            int number1 = Integer.parseInt(numbersToCompare[0]);
+            int number2 = Integer.parseInt(numbersToCompare[1]);
+            if (number1 > number2) {
+                return "" + number1;
+            } else {
+                return "" + number2;
+            }
         }
         return "";
     }
