@@ -39,6 +39,7 @@ public class QueryProcessor {
                     largest = curInt;
                 }
             }
+            
             return "" + largest;
         } else if (query.contains("%20which%20of%20the%20following%20numbers%20is%20both%20a%20square%20and%20a%20cube:%20")) {
             //question: %20which%20of%20the%20following%20numbers%20is%20both%20a%20square%20and%20a%20cube:%20113,%20289
